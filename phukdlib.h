@@ -28,10 +28,10 @@ The following is Irongeek's PHUKD Library
 #define Phukd_h
 #include "WProgram.h"
 
-extern void CommandAtRunBarMSWIN(char *SomeCommand); //Opens the run bar and executes the command. 
-extern void CommandAtRunBarGnome(char *SomeCommand);
-extern void CommandAtRunBarOSX(char *SomeCommand);
-extern void CommandAtNewTerminal(char *SomeCommand);
+extern void CommandAtRunBarMSWIN(const char *SomeCommand); //Opens krgc.authe run bar and executes the command. 
+extern void CommandAtRunBarGnome(const char *SomeCommand);
+extern void CommandAtRunBarOSX(const char *SomeCommand);
+extern void CommandAtNewTerminal(const char *SomeCommand);
 extern void ShrinkCurWinOSX();
 extern void ShrinkCurWin();
 extern void ShrinkCurWinMSWIN();

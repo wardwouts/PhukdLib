@@ -26,47 +26,47 @@ The following is Irongeek's PHUKD Library
 /********************************************************************
  * Opens the run bar and executes the command. 
  ********************************************************************/
-void CommandAtRunBarMSWIN(char *SomeCommand){
+void CommandAtRunBarMSWIN(const char *SomeCommand){
   //digitalWrite(ledPin, HIGH);   // set the LED on
-  Keyboard.set_modifier(MODIFIERKEY_RIGHT_GUI); //Windows key
-  Keyboard.set_key1(KEY_R); // use r key
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_RIGHT_GUI); //Windows key
+  Keyboard.set_key1((uint8_t)KEY_R); // use r key
   Keyboard.send_now(); // send strokes
   Keyboard.set_modifier(0); //prep release of  control keys
   Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
   Keyboard.send_now(); //Send the key changes
   delay(1500);
   Keyboard.print(SomeCommand);
-  Keyboard.set_key1(KEY_ENTER); 
-  Keyboard.send_now();    
-  Keyboard.set_key1(0); 
-  Keyboard.send_now();  
+  Keyboard.set_key1((uint8_t)KEY_ENTER);
+  Keyboard.send_now();
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
 }
 
 /********************************************************************
  * Opens the run bar and executes the command. 
  ********************************************************************/
-void CommandAtRunBarGnome(char *SomeCommand){
+void CommandAtRunBarGnome(const char *SomeCommand){
   //digitalWrite(ledPin, HIGH);   // set the LED on
-  Keyboard.set_modifier(MODIFIERKEY_ALT); //Hold Alt key
-  Keyboard.set_key1(KEY_F2); // use F2 key
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_ALT); //Hold Alt key
+  Keyboard.set_key1((uint8_t)KEY_F2); // use F2 key
   Keyboard.send_now(); // send strokes
   Keyboard.set_modifier(0); //prep release of  control keys
   Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
   Keyboard.send_now(); //Send the key changes
   delay(1500);
   Keyboard.print(SomeCommand);
-  Keyboard.set_key1(KEY_ENTER); 
-  Keyboard.send_now();    
-  Keyboard.set_key1(0); 
-  Keyboard.send_now();  
+  Keyboard.set_key1((uint8_t)KEY_ENTER);
+  Keyboard.send_now();
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
 }
 
 /********************************************************************
  * Opens spotlight and executes the command. -Adam Baldwin
  ********************************************************************/
-void CommandAtRunBarOSX(char *SomeCommand){
-  Keyboard.set_modifier(MODIFIERKEY_GUI);
-  Keyboard.set_key1(KEY_SPACE); // use Space key
+void CommandAtRunBarOSX(const char *SomeCommand){
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_GUI);
+  Keyboard.set_key1((uint8_t)KEY_SPACE); // use Space key
   Keyboard.send_now(); // send strokes
   delay(1500);  // Weird timing for slow systems
   Keyboard.set_modifier(0); //prep release of  control keys
@@ -75,33 +75,33 @@ void CommandAtRunBarOSX(char *SomeCommand){
   delay(1000);
   Keyboard.print(SomeCommand);
   delay(1000);
-  Keyboard.set_key1(KEY_ENTER); 
-  Keyboard.send_now();    
-  Keyboard.set_key1(0); 
-  Keyboard.send_now();  
+  Keyboard.set_key1((uint8_t)KEY_ENTER);
+  Keyboard.send_now();
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
 }
 
 /********************************************************************
  * Opens New Terminal and executes command. -Adam Baldwin
  ********************************************************************/
-void CommandAtNewTerminal(char *SomeCommand){
+void CommandAtNewTerminal(const char *SomeCommand){
   CommandAtRunBarOSX("Terminal");
   // Open a new terminal in case another one was open
   delay(1000);
-  Keyboard.set_modifier(MODIFIERKEY_GUI);
-  Keyboard.set_key1(KEY_N);
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_GUI);
+  Keyboard.set_key1((uint8_t)KEY_N);
   Keyboard.send_now(); // send strokes
   Keyboard.set_modifier(0); //prep release of  control keys
   Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
   Keyboard.send_now(); //Send the key changes
   delay(1500);
   Keyboard.print(SomeCommand);
-  Keyboard.set_key1(KEY_ENTER);
+  Keyboard.set_key1((uint8_t)KEY_ENTER);
   Keyboard.send_now();
   Keyboard.set_key1(0);
   Keyboard.send_now();
   Keyboard.print("exit");
-  Keyboard.set_key1(KEY_ENTER);
+  Keyboard.set_key1((uint8_t)KEY_ENTER);
   Keyboard.send_now();
   Keyboard.set_key1(0);
   Keyboard.send_now();
@@ -111,8 +111,8 @@ void CommandAtNewTerminal(char *SomeCommand){
  * Opens the run bar and executes the command. -Aaron Howell
  ********************************************************************/
 void ShrinkCurWinOSX(){
-  Keyboard.set_modifier(MODIFIERKEY_GUI); //clover key
-  Keyboard.set_key1(KEY_H); // clover-h hides window, clover-m minimizes window
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_GUI); //clover key
+  Keyboard.set_key1((uint8_t)KEY_H); // clover-h hides window, clover-m minimizes window
   Keyboard.send_now();
   delay(250);
   Keyboard.set_modifier(0);
@@ -124,13 +124,13 @@ void ShrinkCurWinOSX(){
  * Shrinks the active window to help hide it.
  ********************************************************************/
 void ShrinkCurWin(){
-  Keyboard.set_modifier(MODIFIERKEY_ALT);
-  Keyboard.set_key1(KEY_SPACE);
-  Keyboard.send_now(); 
+  Keyboard.set_modifier((uint8_t)MODIFIERKEY_ALT);
+  Keyboard.set_key1((uint8_t)KEY_SPACE);
+  Keyboard.send_now();
   delay(250);
   Keyboard.set_modifier(0);
   Keyboard.set_key1(0);
-  Keyboard.send_now();  
+  Keyboard.send_now();
   Keyboard.print("n");
 }
 
@@ -150,7 +150,7 @@ void PressAndRelease(int KeyCode,int KeyCount){
   for (KeyCounter=0;  KeyCounter!=KeyCount; KeyCounter++){
     Keyboard.set_key1(KeyCode); // use r key
     Keyboard.send_now(); // send strokes
-    Keyboard.set_key1(0); 
+    Keyboard.set_key1(0);
     Keyboard.send_now(); // send strokes
   }
 }
@@ -174,10 +174,10 @@ boolean IsNumbOn(void)
 {
   if ((ledkeys() & 1) == 1){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 
 /*********************************************************************
@@ -187,10 +187,10 @@ boolean IsCapsOn(void)
 {
   if ((ledkeys() & 2) == 2){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 
 /*********************************************************************
@@ -198,11 +198,11 @@ boolean IsCapsOn(void)
  **********************************************************************/
 boolean IsScrlOn(void)
 {
-  if ((ledkeys() & 4) == 4){    
+  if ((ledkeys() & 4) == 4){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 //********************************************************************
