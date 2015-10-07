@@ -96,9 +96,15 @@ void CommandAtNewTerminal(char *SomeCommand){
   Keyboard.send_now(); //Send the key changes
   delay(1500);
   Keyboard.print(SomeCommand);
-  Keyboard.set_key1(KEY_ENTER); 
-  Keyboard.send_now();    
-  Keyboard.set_key1(0); 
+  Keyboard.set_key1(KEY_ENTER);
+  Keyboard.send_now();
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
+  Keyboard.print("exit");
+  Keyboard.set_key1(KEY_ENTER);
+  Keyboard.send_now();
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
 }
 
 /********************************************************************
