@@ -43,4 +43,5 @@ extern int ledkeys();
 extern boolean IsNumbOn(void);
 extern boolean IsCapsOn(void);
 extern boolean IsScrlOn(void);
+extern void SlowType(const char *SomeCommand, int Delay);
 #endif

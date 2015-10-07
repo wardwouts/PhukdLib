@@ -1,41 +1,45 @@
 /*
 The following is Irongeek's PHUKD Library
  ver 0.4
- 
+
  Project Page:
  http://www.irongeek.com/i.php?page=security/programmable-hid-usb-keystroke-dongle 
- 
+
  To learn more about Teensyduino see:
  http://www.pjrc.com/teensy/teensyduino.html
  Look in arduino-xxxx\hardware\teensy\cores\usb_hid\usb_api.h for key definitions
  Edit arduino-xxxx\hardware\teensy\cores\usb_hid\usb_private.h to change USB Vendor and Product ID
- 
+
  Compile Notes: Make sure you set the correct board type under Tools->Board, and the correct Tools->USB type as well.
- 
- OS X Spotlight and Terminal code provided by Adam Baldwin and Aaron Howell ngenuity-is.com / evilpacket.net 
+
+ OS X Spotlight and Terminal code provided by Adam Baldwin and Aaron Howell ngenuity-is.com / evilpacket.net
  jp (.ronin) http://www.hackfromacave.com also provide some source code for the OS X side, but I ended up using
  Adam and Aaron's.
- 
+
  Should work now with Arduino 1.0.
- 
+
  */
 
 #include "WProgram.h"
 #include "phukdlib.h"
 
 /********************************************************************
- * Opens the run bar and executes the command. 
+ * Opens the run bar and executes the command.
  ********************************************************************/
 void CommandAtRunBarMSWIN(const char *SomeCommand){
   //digitalWrite(ledPin, HIGH);   // set the LED on
-  Keyboard.set_modifier((uint8_t)MODIFIERKEY_RIGHT_GUI); //Windows key
-  Keyboard.set_key1((uint8_t)KEY_R); // use r key
-  Keyboard.send_now(); // send strokes
-  Keyboard.set_modifier(0); //prep release of  control keys
-  Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
-  Keyboard.send_now(); //Send the key changes
+  for(int i=0; i<5; i++){
+    Keyboard.set_modifier((uint8_t)MODIFIERKEY_LEFT_GUI); //Windows key
+    Keyboard.set_key1((uint8_t)KEY_R); // use r key
+    Keyboard.send_now(); // send strokes
+    delay(150);
+    Keyboard.set_modifier(0); //prep release of  control keys
+    Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
+    Keyboard.send_now(); //Send the key changes
+    delay(150);
+  }
   delay(1500);
-  Keyboard.print(SomeCommand);
+  SlowType(SomeCommand, 50);
   Keyboard.set_key1((uint8_t)KEY_ENTER);
   Keyboard.send_now();
   Keyboard.set_key1(0);
@@ -43,7 +47,7 @@ void CommandAtRunBarMSWIN(const char *SomeCommand){
 }
 
 /********************************************************************
- * Opens the run bar and executes the command. 
+ * Opens the run bar and executes the command.
  ********************************************************************/
 void CommandAtRunBarGnome(const char *SomeCommand){
   //digitalWrite(ledPin, HIGH);   // set the LED on
@@ -143,7 +147,7 @@ void ShrinkCurWinGnome(){
 }
 
 /********************************************************************
- * This function simplifies the pressing and releasing of a key.  
+ * This function simplifies the pressing and releasing of a key.
  ********************************************************************/
 void PressAndRelease(int KeyCode,int KeyCount){
   int KeyCounter=0;
@@ -205,4 +209,16 @@ boolean IsScrlOn(void)
     return false;
   }
 }
+
+/********************************************************************
+ * Type with a delay between keystrokes
+ ********************************************************************/
+//void CommandAtRunBarMSWIN(const char *SomeCommand){
+void SlowType(const char *SomeCommand, int Delay){
+  for(const char* it = SomeCommand; *it; ++it) {
+    Keyboard.print(*it);
+    delay(Delay);
+  }
+}
+
 //********************************************************************
