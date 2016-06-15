@@ -58,7 +58,7 @@ void CommandAtRunBarGnome(const char *SomeCommand){
   Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
   Keyboard.send_now(); //Send the key changes
   delay(1500);
-  Keyboard.print(SomeCommand);
+  SlowType(SomeCommand, 50);
   Keyboard.set_key1((uint8_t)KEY_ENTER);
   Keyboard.send_now();
   Keyboard.set_key1(0);
